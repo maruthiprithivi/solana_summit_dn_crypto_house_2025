@@ -6,7 +6,7 @@ This repository contains demo queries and documentation for showcasing ClickHous
 
 ## 📊 The Challenge
 
-Solana processes up to **65,000 transactions per second**, generating approximately **400GB of data daily**. Traditional databases struggle with:
+Traditional databases struggle with:
 
 - ❌ Hour-long query times
 - ❌ Expensive infrastructure costs
