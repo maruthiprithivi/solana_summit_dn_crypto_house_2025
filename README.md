@@ -37,7 +37,6 @@ This demo showcases 10 progressive queries that solve real Solana ecosystem chal
 7. **Instant Dashboards** - Pre-aggregated views for zero-latency analytics
 8. **Compute Optimization** - Profile program performance
 9. **Congestion Analysis** - Identify network bottlenecks
-10. **Performance Strategies** - Advanced optimization techniques
 
 ## 🚀 Getting Started
 
