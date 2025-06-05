@@ -15,6 +15,20 @@ SELECT
 FROM solana.transactions;
 
 -- ============================================================================
+-- QUERY 1.1: Data Size Overview
+-- Purpose: Show the size and compression ratio of data we're analyzing
+-- ============================================================================
+
+SELECT
+    database,
+    name AS table,
+    formatReadableSize(total_bytes) AS compressed_bytes,
+    formatReadableSize(total_bytes_uncompressed) AS uncompressed_bytes
+FROM system.tables
+WHERE database = 'solana' AND name = 'transactions';
+
+
+-- ============================================================================
 -- QUERY 2: Network Health Monitoring
 -- Purpose: Real-time network health metrics for validators and dApp developers
 -- Optimization: PREWHERE for efficient filtering
@@ -108,6 +122,21 @@ SELECT
 FROM solana.token_transfers
 PREWHERE value > 100000000000  -- High value filter
     AND block_timestamp >= '2025-05-20 18:00:00'  -- Last 2 hours
+WHERE block_timestamp <= '2025-05-20 20:00:51'
+ORDER BY value DESC
+LIMIT 10;
+
+-- Running the query with indexes=1 to see the query plan and undestand why ClickHouse is Fast while being cost efficiecnt 
+EXPLAIN indexes=1 SELECT 
+    block_timestamp,
+    source,
+    destination,
+    value / pow(10, toFloat64(decimals)) as amount_tokens,
+    mint,
+    substring(tx_signature, 1, 16) as tx_sig_short  -- Reduce data transfer
+FROM solana.token_transfers
+PREWHERE value > 100000000000  -- High value filter
+    AND block_timestamp >= '2025-05-20 00:00:00'  -- Last 10 hours
 WHERE block_timestamp <= '2025-05-20 20:00:51'
 ORDER BY value DESC
 LIMIT 10;
