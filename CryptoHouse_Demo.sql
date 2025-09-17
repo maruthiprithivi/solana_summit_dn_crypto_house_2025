@@ -8,7 +8,7 @@
 -- Purpose: Show the scale of data we're analyzing
 -- ============================================================================
 SELECT 
-    formatReadableQuantity(count() * 1000) as estimated_total_transactions,
+    formatReadableQuantity(count()) as estimated_total_transactions,
     max(block_timestamp) as latest_data,
     min(block_timestamp) as earliest_data,
     dateDiff('day', min(block_timestamp), max(block_timestamp)) as days_of_data
